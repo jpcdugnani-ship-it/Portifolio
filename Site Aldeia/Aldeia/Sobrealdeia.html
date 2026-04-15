@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aldeia Tekoa YVY Porã Jaraguá</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            overflow: hidden;
+            font-size: 10;
+        }
+
+        .header {
+            font-family: "Inter", sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            text-align: center;
+            color: rgb(0, 0, 0);
+            padding: 15px 20px;
+            background-color: #e3e3e3;
+            border-bottom: 2px solid rgb(0, 0, 0);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-button {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 15px 30px;
+            border: none;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 25%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .menu-list {
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .menu-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-list li {
+            padding: 15px 0;
+        }
+
+        .menu-list button {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: calc(100vh - 60px);
+            padding: 10px 20px;
+            font-size: 10px;
+        }
+
+        .text-container {
+            width: 45%;
+            text-align: left;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            font-size: 20px;
+            color: #333;
+            text-align: justify;
+        }
+
+        .profile-section {
+            width: 100%;
+            text-align: center;
+            padding: 40px 0;
+            background-color: #fff;
+        }
+
+        .profile-section h2 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .profile-section p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        img {
+            width: 70%;
+            height: auto;
+            object-fit: cover;
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            const overlay = document.querySelector('.overlay');
+            overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</head>
+<body>
+
+    <div class="header">
+       Eiru Aldeia-Taquara | Tekoa YVY Porã Jaraguá
+        <div class="menu-button" onclick="toggleMenu()">☰ Saiba Mais</div>
+    </div>
+
+    <div class="overlay" onclick="toggleMenu()">
+        <div class="menu-list">
+            <ul>
+                <li><button onclick="window.location.href='../Menu/Aldeiatekoyvypora.html'">Menu</button></li>
+                <li><button onclick="window.location.href='../Siteabelhinhas/Eiru-Taquara_BancodeBambu.html'">Bambu</button></li>
+                <li><button onclick="window.location.href='../Menu/Abelhas.html'">Caixas e Abelhas</button></li>
+                <li><button onclick="window.location.href='../Aldeia/Sobrealdeia.html'">Sobre</button></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="text-container">
+            <div class="title">Aldeia Tekoa YVY Porã</div>
+            <div class="description">
+                A aldeia Tekoa Yvy Porã é um dos grupos indígenas remanescentes localizada próximo ao Pico do Jaraguá. 
+                O grupo se estabeleceu lá na década de 1960 com a chegada de Joaquim Augusto Martins. Nos dias atuais o 
+                cacique Márcio Boggarim lidera um importante projeto de preservação da cultura guarani e do meio ambiente 
+                por meio da preservação de abelhas sem ferrão nativas da região.
+            </div>
+        </div>
+        <img src="Aldeia.jpg" alt="Imagem da Aldeia">
+    </div>
+
+</body>
+</html>
+
