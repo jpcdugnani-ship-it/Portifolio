@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Eiru-Taquara | Caixa Didática de Abelhas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+		.header {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-weight: 900;
+        font-size: 20px;
+        color: #ff9900;
+        padding: 20px;
+        background-color: #fff4e0;
+        border-bottom: 2px solid #ff9900;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+        .container-1, .container-2, .container-3 {
+            display: grid;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container-1 {
+            grid-template-columns: 3fr 1fr;
+            max-height: 867px;
+        }
+
+        .container-2 {
+            grid-template-columns: 1fr 3fr;
+            max-height: 757px;
+        }
+
+        .container-3 {
+            grid-template-columns: 3fr 1fr;
+            max-height: 850px;
+        }
+
+        .background-image-1, .background-image-2, .background-image-3 {
+            width: 100%;
+            height: auto;
+        }
+
+        .leg-1, .leg-2, .leg-3 {
+            font-family: "Inter", sans-serif;
+            font-size: 15px;
+            color: grey;
+            padding: 10%;
+            text-align: justify;
+        }
+
+        .leg-1 {
+            margin-top: 730px;
+			padding-right: 35%;
+        }
+
+        .leg-2 {
+            padding-left: 35%;
+            position: relative;
+            bottom: 200px;
+            margin-top: 635px;
+        }
+
+        .leg-3 {
+            padding-right: 35%;
+            margin-top: 720px;
+        }
+
+        .title-1, .title-2, .title-3 {
+            font-family: "Inter", sans-serif;
+            font-weight: 900;
+            font-size: 120px;
+            text-align: justify;
+            color: #ff9900;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: 2s ease;
+        }
+
+        .title-1 {
+            position: relative;
+            bottom: 600px;
+            left: 70%;
+        }
+
+        .title-2 {
+            position: relative;
+            bottom: 690px;
+            left: 40%;
+        }
+
+        .title-3 {
+            position: relative;
+            bottom: 640px;
+            left: 73%;
+            text-align:right;
+        }
+
+        .title-1:hover, .title-2:hover, .title-3:hover {
+            transform: scale(0.8);
+        }
+
+        .menu-button {
+        background-color: #ffffff;
+        color: #000000;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 15px 30px;
+        box-sizing: border-box;
+        border: none;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 25%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .menu-list {
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .menu-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-list li {
+            padding: 15px 0;
+        }
+
+        .menu-list button {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            const overlay = document.querySelector('.overlay');
+            overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        Eiru-Taquara | Caixa Didática de Abelhas
+        <div class="menu-button" onclick="toggleMenu()">☰ Saiba Mais</div>
+    </div>
+
+    <div class="overlay" onclick="toggleMenu()">
+        <div class="menu-list">
+            <ul>
+                <li><button onclick="window.location.href='../Menu/Aldeiatekoyvypora.html'">Menu</button></li>
+                <li><button onclick="window.location.href='../Siteabelhinhas/Eiru-Taquara_BancodeBambu.html'">Bambu</button></li>
+                <li><button onclick="window.location.href='../Menu/Abelhas.html'">Caixas e Abelhas</button></li>
+                <li><button onclick="window.location.href='../Aldeia/Sobrealdeia.html'">Sobre</button></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-1">
+        <img src="IMG_3026.jpg" alt="Foto" class="background-image-1">
+        <p class="leg-1">Curiosidades e informações sobre as abelhas presentes na Aldeia Tekoa Yvy Porã. </p>
+        <a href="../Especiesdeabelhas/SobreAbelhas.html">
+            <button class="title-1">Sobre<br>Abelhas</button><br>
+        </a>
+    </div>
+	<div class="container-2" style="margin-top: 10px;">
+		<p class="leg-2">Informações sobre as caixas produzidas, imagens do processo de montagem e do produto, além do passo-a-passo de como fazer a sua</p>
+		<img src="IMG_2521-_1_.jpg" alt="Foto das caixas" class="background-image-2">
+		<a href="../Caixas/SobreCaixas.html">
+			<button class="title-2">SOBRE<br>CAIXAS</button>
+		</a>
+	</div>
+	
+	<div class="container-3" style="position: relative; bottom: 180px;">
+		<img src="WhatsApp Image 2024-11-18 at 15.26.32.jpeg" alt="Foto na aldeia em conjunto equipe ao lado do cacique Márcio Boggarim." class="background-image-3">
+		<p class="leg-3">Conheça um pouco mais sobre a equipe por trás do projeto, composta por 3 alunos do 4° semestre.</p>
+		<a href="../Nos/SobreNos.html">
+			<button class="title-3">SOBRE<br>NÓS</button>
+		</a>
+	</div>
+</body>
+</html>
