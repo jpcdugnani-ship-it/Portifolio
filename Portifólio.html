@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Joao Pedro Cruz Dugnani | Portfolio Criativo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #032b43;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            line-height: 1.5;
+            color: #eef4ff;
+            scroll-behavior: smooth;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(135deg, #0a5f8a 20%, transparent 20%),
+                linear-gradient(-135deg, #0a5f8a 20%, transparent 20%),
+                linear-gradient(135deg, transparent 80%, #0a5f8a 80%),
+                linear-gradient(-135deg, transparent 80%, #0a5f8a 80%);
+            background-size: 48px 48px;
+            background-position: 0 0, 0 24px, 24px -24px, -24px 0px;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            background: rgba(5, 79, 119, 0.95);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 5%;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .home-icon {
+            font-size: 28px;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+            background: rgba(255,255,255,0.1);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .home-icon:hover {
+            background: #ffb347;
+            transform: scale(1.02);
+            color: #032b43;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            border-left: 2px solid #ffb347;
+            padding-left: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+            font-size: 1rem;
+            padding: 6px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: #ffcd94;
+            border-bottom-color: #ffb347;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            text-align: center;
+            margin: 1rem 0 2.5rem 0;
+        }
+
+        .hero-title h1 {
+            background: rgba(5, 79, 119, 0.85);
+            backdrop-filter: blur(4px);
+            display: inline-block;
+            padding: 0.8rem 2.2rem;
+            border-radius: 60px;
+            font-size: 1.9rem;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,180,70,0.6);
+            font-weight: 600;
+        }
+
+        .sobre-mim {
+            background: rgba(10, 55, 80, 0.8);
+            backdrop-filter: blur(3px);
+            border-radius: 32px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: transform 0.2s;
+        }
+
+        .sobre-mim-imagem {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .sobre-mim-imagem img {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 28px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border: 3px solid #ffb347;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .sobre-mim-imagem img:hover {
+            transform: scale(1.02);
+        }
+
+        .sobre-mim-texto {
+            flex: 2;
+        }
+
+        .sobre-mim-texto h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-left: 6px solid #ffb347;
+            padding-left: 18px;
+            color: #fff3e0;
+        }
+
+        .sobre-mim-texto p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            text-align: justify;
+            color: #e0f0fa;
+        }
+
+        .area-card {
+            background: rgba(10, 55, 80, 0.75);
+            backdrop-filter: blur(3px);
+            border-radius: 32px;
+            padding: 1.6rem 1.8rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .area-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
+            background: rgba(10, 65, 95, 0.85);
+        }
+
+        .area-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border-left: 6px solid #ffb347;
+            padding-left: 18px;
+            letter-spacing: -0.3px;
+            color: #fff3e0;
+        }
+
+        .area-description {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+            color: #e0f0fa;
+            background: rgba(0,0,0,0.2);
+            padding: 1rem 1.2rem;
+            border-radius: 24px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 1.8rem 0 0.5rem;
+        }
+
+        .img-card {
+            background: #0f2e3f;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+            aspect-ratio: 1 / 1;
+            position: relative;
+            cursor: pointer;
+            border: 2px solid #2c6e8f;
+        }
+
+        .img-card a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+            background: linear-gradient(145deg, #1f4b66, #0b2f42);
+        }
+
+        .img-card .hover-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            color: #ffddb0;
+            text-align: center;
+            padding: 15px 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            z-index: 3;
+            border-top: 2px solid #ffb347;
+            letter-spacing: 0.5px;
+        }
+
+        .img-card:hover .hover-text {
+            transform: translateY(0);
+        }
+
+        .img-card:hover .img-placeholder {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .img-card a:after {
+            content: "LINK";
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: 0.2s;
+            color: white;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 8px;
+            border-radius: 20px;
+            text-shadow: 0 0 3px black;
+            z-index: 2;
+        }
+
+        .img-card:hover a:after {
+            opacity: 0.9;
+        }
+
+        /* Estilo especial para PDFs */
+        .img-card a[href$=".pdf"] .hover-text {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .img-card a[href$=".pdf"]:hover .hover-text {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        .img-card a[href$=".pdf"]:after {
+            content: "PDF";
+            background: #e74c3c;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .img-card a[href$=".pdf"]:hover:after {
+            background: #c0392b;
+        }
+
+        /* Estilos para os 3 grandes retangulos de sites */
+        .sites-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 1.8rem 0 0.5rem;
+        }
+
+        .site-card {
+            background: #0a2535;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid #2c6e8f;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+        }
+
+        .site-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
+            border-color: #ffb347;
+        }
+
+        .site-link {
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .site-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background: linear-gradient(145deg, #1f4b66, #0b2f42);
+        }
+
+        .site-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .site-card:hover .site-img {
+            transform: scale(1.05);
+        }
+
+        .site-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffddb0;
+            margin-bottom: 0.8rem;
+        }
+
+        .site-description {
+            font-size: 0.95rem;
+            color: #cce4f0;
+            line-height: 1.5;
+            margin-bottom: 1.2rem;
+        }
+
+        .site-button {
+            display: inline-block;
+            background: rgba(255, 179, 71, 0.2);
+            color: #ffb347;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid #ffb347;
+        }
+
+        .site-card:hover .site-button {
+            background: #ffb347;
+            color: #032b43;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 1.8rem 0 0.5rem;
+        }
+
+        .video-card {
+            background: #0a2535;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: transform 0.25s, box-shadow 0.25s;
+            border: 2px solid #2c6e8f;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+        }
+
+        .video-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 28px rgba(0,0,0,0.35);
+            border-color: #ffb347;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-caption {
+            padding: 15px 16px;
+            background: rgba(0,0,0,0.6);
+            color: #ffddb0;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            border-top: 1px solid #ffb34760;
+        }
+
+        .footer-social {
+            background: #054061;
+            text-align: center;
+            padding: 2rem 1rem 1.5rem;
+            margin-top: 2rem;
+            border-top: 1px solid #ffb34760;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem;
+        }
+
+        .social-links a {
+            color: #ffddb0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: 0.2s;
+            padding: 6px 14px;
+            border-radius: 40px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .social-links a:hover {
+            background: #ffb347;
+            color: #032b43;
+            transform: scale(1.03);
+        }
+
+        .email-container {
+            margin-top: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .email-link {
+            color: #ffddb0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.2s;
+            padding: 6px 18px;
+            border-radius: 40px;
+            background: rgba(255,255,255,0.08);
+            display: inline-block;
+            border: 1px solid rgba(255,180,70,0.4);
+        }
+
+        .email-link:hover {
+            background: #ffb347;
+            color: #032b43;
+            transform: scale(1.02);
+            border-color: #ffb347;
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ffb347;
+            color: #032b43;
+            border-radius: 40px;
+            padding: 10px 16px;
+            font-weight: bold;
+            text-decoration: none;
+            z-index: 99;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 12px black;
+            transition: 0.2s;
+        }
+
+        .scroll-top:hover {
+            background: #ffcd94;
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 900px) {
+            .sites-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                padding: 1.2rem;
+            }
+            .area-title {
+                font-size: 1.6rem;
+            }
+            .image-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 1.5rem;
+            }
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                gap: 15px;
+                justify-content: center;
+                margin-top: 10px;
+            }
+            .sobre-mim {
+                flex-direction: column;
+                text-align: center;
+            }
+            .sobre-mim-texto h2 {
+                text-align: center;
+                border-left: none;
+                border-bottom: 2px solid #ffb347;
+                padding-bottom: 8px;
+                display: inline-block;
+            }
+            .social-links {
+                gap: 1rem;
+            }
+            .social-links a {
+                font-size: 0.95rem;
+                padding: 5px 12px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sites-grid {
+                grid-template-columns: 1fr;
+            }
+            .site-image {
+                height: 200px;
+            }
+            .site-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .hero-title h1 {
+                font-size: 1.2rem;
+                padding: 0.6rem 1rem;
+            }
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-area">
+        <a href="#" class="home-icon">⌂</a>
+        <div class="logo-text">Joao Pedro Cruz Dugnani</div>
+    </div>
+    <div class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#artes">Artes Gráficas</a>
+        <a href="#sites">Sites</a>
+        <a href="#diagramacao">Diagramação</a>
+        <a href="#modelagem">Modelagem 3D</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#jogos">Planej. Jogos</a>
+        <a href="#sinalizacao">Sinalizacao</a>
+        <a href="#edicao">Edicao & Motion</a>
+    </div>
+</header>
+
+<div class="container">
+    <div class="hero-title">
+        <h1>Portfolio de Joao Pedro Cruz Dugnani</h1>
+    </div>
+
+    <!-- SECAO SOBRE MIM -->
+    <div id="sobre" class="sobre-mim">
+        <div class="sobre-mim-imagem">
+            <img src="Imagens do Site/joao.jpg" alt="Foto de perfil Joao Pedro">
+        </div>
+        <div class="sobre-mim-texto">
+            <h2>Sobre Mim</h2>
+            <p>Ola! Sou Joao Pedro Cruz Dugnani, Designer em formacao no 7 semestre na Universidade Presbiteriana Mackenzie. Com experiencia pratica em design gráfico, comunicacao visual e gestao de projetos. Atuei como estagiario na Arke Home Design e nas Ligas Academicas de Design e COMEX da Mackenzie, desenvolvendo materiais para midias sociais, identidade visual e conteudo institucional. No Diretorio Academico de Design, coordenei a comunicacao e estrategias visuais. Domino ferramentas como Adobe Creative Suite, Figma e Canva, e possuo conhecimento em web (HTML/CSS) e 3D. Busco um estagio em Design Gráfico para aplicar minha visao criativa e tecnica em projetos desafiadores.</p>
+        </div>
+    </div>
+
+    <!-- 1. CRIACAO DE ARTES PARA POSTS E MATERIAIS GRÁFICOS -->
+    <div id="artes" class="area-card">
+        <div class="area-title">Criação de Artes para Posts e Materiais Gráficos</div>
+        <div class="area-description">
+            Crio pecas visuais impactantes para redes sociais, campanhas publicitarias, flyers, banners e
+            sigo a identidade visual. Unindo tipografia, cor e composicao para comunicar mensagens
+            com criatividade e estrategia. Utilizando ferramentas como Adobe Photoshop, Adobe Illustrator e Canva
+            para gerar resultados autenticos.
+        </div>
+        <div class="image-grid">
+            <div class="img-card"><a href="FlyerComexMack.png" target="_blank"><img class="img-placeholder" src="Imagens do Site/FlyerComexMack.png" alt="Flyer campanha"><div class="hover-text">Flyer para campanha de processo seletivo</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/IdentidadeVisual.png" alt="Post de Allexandre Wolnner"><div class="hover-text">Post Instagram</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/Post.png" alt="Post para a Liga de Design"><div class="hover-text">Post para Design Mack</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/Arké.png" alt="Cartaz promocional"><div class="hover-text">Post Arké</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/DMPOST.png" alt="Folder institucional"><div class="hover-text">Post Design Mack</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/Post Dada (2).jpg" alt="Anuncio digital"><div class="hover-text">Anuncio Digital</div></a></div>
+        </div>
+    </div>
+
+    <!-- 2. CRIACAO DE SITES - 3 GRANDES RETANGULOS -->
+    <div id="sites" class="area-card">
+        <div class="area-title">Criação de Sites</div>
+        <div class="area-description">
+        Desenvolvo layouts de sites sabendo fazar o Front-End conheço as programação nas linguagens de Java, HTML e CSS para montá-los, além de ter conhecimento no processo de organização do site em Figma&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>
+        <div class="sites-grid">
+            <!-- Site 1 - Tribulê -->
+            <div class="site-card">
+                <a href="projetos/landing-page/index.html" target="_blank" class="site-link">
+                    <div class="site-image">
+                        <img class="site-img" src="Imagens do Site/Tribulê/Joao.JPEG" alt="Landing page Tribulê">
+                    </div>
+                    <div class="site-info">
+                        <h3 class="site-title">Tribulê</h3>
+                        <p class="site-description">Desenvolvimento de Site para empresa de joia conhecida como Tribulê</p>
+                        <div class="site-button">Acessar Site</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Site 2 - Aldeia Tekoa Yvy Porã -->
+            <div class="site-card">
+                <a href="Imagens do Site/Abelinhas/Menu/Aldeiatekoyvypora.html" target="_blank" class="site-link">
+                    <div class="site-image">
+                        <img class="site-img" src="Imagens do Site/Aldeia.jpg" alt="Site Aldeia Tekoa Yvy Porã">
+                    </div>
+                    <div class="site-info">
+                        <h3 class="site-title">Aldeia Tekoa Yvy Porã</h3>
+                        <p class="site-description">Criação de Site acadêmico para divulgação de projetos</p>
+                        <div class="site-button">Acessar Site</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. DIAGRAMACAO - COM SUPORTE PARA PDF -->
+    <div id="diagramacao" class="area-card">
+        <div class="area-title">Diagramação</div>
+        <div class="area-description">
+            Realizo diagramacao de revistas, livros, e-books, catalogos e materiais editoriais. Utilizo Adobe InDesign
+            e tecnicas de hierarquia visual para criar layouts elegantes e funcionais, garantindo legibilidade e harmonia.
+        </div>
+        <div class="image-grid">
+            <div class="img-card">
+                <a href="Imagens do Site/A Lenda de Hércules-Digital.pdf" target="_blank">
+                    <img class="img-placeholder" src="Imagens do Site/Lenda.png" alt="Revista A Lenda de Hércules">
+                    <div class="hover-text">A Lenda de Hércules - Revista </div>
+                </a>
+            </div>
+            <div class="img-card">
+                <a href="Imagens do Site/CadernodeProjeto.pdf" target="_blank">
+                    <img class="img-placeholder" src="Imagens do Site/Caixa.png" alt="Livro diagramado">
+                    <div class="hover-text">Relatório de Projeto IV</div>
+                </a>
+            </div>
+            <div class="img-card">
+                <a href="Imagens do Site/Relatório Projeto III.pdf" target="_blank">
+                    <img class="img-placeholder" src="Imagens do Site/Placa20.jpg" alt="E-book">
+                    <div class="hover-text">Relatório de Projeto III</div>
+                </a>
+            </div>
+            <div class="img-card">
+                <a href="Imagens do Site/Fanzine Cálice.pdf" target="_blank">
+                    <img class="img-placeholder" src="Imagens do Site/Capa.png" alt="Catalogo de produtos">
+                    <div class="hover-text">Fanzine Cálice</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. MODELAGEM 3D -->
+    <div id="modelagem" class="area-card">
+        <div class="area-title">Modelagem 3D</div>
+        <div class="area-description">
+            Crio modelos 3D no Blender, Rhino e Autocad, tanto para representações digitais, quanto para a impressão de objetos
+        </div>
+        <div class="image-grid">
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/Rosquinha.png" alt="Produto 3D"><div class="hover-text">Rosquinha feita no Blender</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/Captura de tela 2023-10-17 000725.png" alt="Personagem 3D"><div class="hover-text">Modelagem Luminária</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/Rosquinha 3.png" alt="Ambiente 3D"><div class="hover-text">Rosquinha no Blender</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/Modelagem Luminária.jpg" alt="Render arquitetonico"><div class="hover-text">Luminária de Dinossauro Modelada no Rhino</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/modelo_veiculo.jpg" alt="Modelo veiculo"><div class="hover-text">Modelagem de Brinquedo Infantil para impressão 3D&nbsp;</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/conceito_3d.jpg" alt="Conceito 3D"><div class="hover-text">Brinquedo Impresso</div></a></div>
+        </div>
+    </div>
+
+    <!-- 5. CRIACAO DE PRODUTOS -->
+    <div id="produtos" class="area-card">
+        <div class="area-title">Criação de Produtos</div>
+        <div class="area-description">
+            Desenvolvo produtos digitais e fisicos, desde a concepcao ate o prototipo. Trabalho com design de embalagens,
+            identidade de produto, mockups e apresentacoes comerciais.
+        </div>
+        <div class="image-grid">
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/embalagem_produto.jpg" alt="Embalagem"><div class="hover-text">Embalagem</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/mockup_camisa.jpg" alt="Mockup camisa"><div class="hover-text">Mockup Camisa</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/mockup_caneca.jpg" alt="Mockup caneca"><div class="hover-text">Mockup Caneca</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/prototipo_produto.jpg" alt="Prototipo"><div class="hover-text">Prototipo</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/adesivo_personalizado.jpg" alt="Adesivo"><div class="hover-text">Adesivo</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/brinde_corporativo.jpg" alt="Brinde corporativo"><div class="hover-text">Brinde</div></a></div>
+        </div>
+    </div>
+
+    <!-- 6. PLANEJAMENTO DE JOGOS -->
+    <div id="jogos" class="area-card">
+        <div class="area-title">Planejamento de Jogos</div>
+        <div class="area-description">
+        Tenho formação em Game Design, sei organizar e pensar mecânicas, regras e balanceamento para jogos digitais e físicos, também conheço codificação para jogos digitais.&nbsp; </div>
+        <div class="image-grid">
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/gdd_projeto.jpg" alt="GDD"><div class="hover-text">GDD</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/personagem_jogo.jpg" alt="Personagem jogo"><div class="hover-text">Personagem</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/cenario_jogo.jpg" alt="Cenario jogo"><div class="hover-text">Cenario</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/level_design.jpg" alt="Level design"><div class="hover-text">Level Design</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/storyboard_jogo.jpg" alt="Storyboard"><div class="hover-text">Storyboard</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/interface_jogo.jpg" alt="Interface jogo"><div class="hover-text">Interface</div></a></div>
+        </div>
+    </div>
+
+    <!-- 7. SINALIZACAO -->
+    <div id="sinalizacao" class="area-card">
+        <div class="area-title">Sinalização</div>
+        <div class="area-description">
+            Projeto sistemas de sinalizacao para ambientes internos e externos, incluindo placas, totens, adesivos de piso
+            e comunicacao visual para eventos e estabelecimentos comerciais.
+        </div>
+        <div class="image-grid">
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/placa_sinalizacao.jpg" alt="Placa sinalizacao"><div class="hover-text">Placa</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/totem_sinalizacao.jpg" alt="Totem"><div class="hover-text">Totem</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/adesivo_piso.jpg" alt="Adesivo piso"><div class="hover-text">Adesivo de Piso</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/sinalizacao_evento.jpg" alt="Sinalizacao evento"><div class="hover-text">Sinalizacao Evento</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/faixa_direcional.jpg" alt="Faixa direcional"><div class="hover-text">Faixa Direcional</div></a></div>
+            <div class="img-card"><a href="#" target="_blank"><img class="img-placeholder" src="Imagens do Site/painel_informativo.jpg" alt="Painel informativo"><div class="hover-text">Painel</div></a></div>
+        </div>
+    </div>
+
+    <!-- 8. EDICAO E MOTION DESIGN -->
+    <div id="edicao" class="area-card">
+        <div class="area-title">Edicao e Motion Design</div>
+        <div class="area-description">
+          Realizo edicao de videos, criacao de motion graphics, vinhetas, animacoes institucionais e videos para redes
+            sociais. Utilizo Adobe Premiere,Capcut, Adobe After Effects.
+      </div>
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/SEU_ID_VIDEO_1" title="Motion Design 1" allowfullscreen></iframe>
+                </div>
+                <div class="video-caption">Motion Design - Comercial</div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/SEU_ID_VIDEO_2" title="Motion Design 2" allowfullscreen></iframe>
+                </div>
+                <div class="video-caption">Vinheta Institucional</div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/SEU_ID_VIDEO_3" title="Motion Design 3" allowfullscreen></iframe>
+                </div>
+                <div class="video-caption">Edicao de Video</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- RODAPE COM REDES SOCIAIS -->
+<footer class="footer-social">
+    <div class="social-links">
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">GitHub</a>
+        <a href="#" target="_blank">Behance</a>
+    </div>
+    <div class="email-container">
+        <a href="mailto:joaopedro@email.com" class="email-link">joaopedro@email.com</a>
+    </div>
+    <div class="copyright">
+        (c) 2026 Joao Pedro Cruz Dugnani - Todos os direitos reservados
+    </div>
+</footer>
+
+<a href="#" class="scroll-top">Voltar ao topo</a>
+
+</body>
+</html>
