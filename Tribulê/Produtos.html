@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - Studio Tribulê</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #FFF4E5;
+            color: #231E1B;
+            line-height: 1.6;
+        }
+        
+        /* Header (igual ao da página de produto) */
+        header {
+            background-color: #231E1B;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 180px;
+            height: 60px;
+            border-radius: 5px;
+            object-fit: cover;
+            border: 2px solid #FFF4E5;
+            transition: transform 0.3s;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #FFF4E5;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 244, 229, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.active {
+            background-color: rgba(255, 244, 229, 0.15);
+        }
+        
+        .nav-btn i {
+            font-size: 18px;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Seção principal de produtos */
+        .products-hero {
+            padding: 40px 30px 30px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .products-title {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #231E1B;
+        }
+        
+        .products-subtitle {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #231E1B;
+            opacity: 0.8;
+        }
+        
+        /* Grid de produtos - AGORA COM 2 COLUNAS E CARDS ESCUROS */
+        .products-grid {
+            padding: 0 30px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .products-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 colunas para duplas */
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .product-item {
+            background-color: #231E1B; /* COR ESCURA PARA OS CARDS */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid rgba(35, 30, 27, 0.3);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-item:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            height: 400px; /* Aumentado para 2 colunas */
+            overflow: hidden;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: all 0.5s ease;
+        }
+        
+        .product-item:hover .product-image {
+            transform: scale(1.05);
+            filter: brightness(0.9);
+        }
+        
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(35, 30, 27, 0);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s ease;
+            opacity: 0;
+            padding: 15px;
+        }
+        
+        .product-item:hover .product-overlay {
+            background-color: rgba(0, 0, 0, 0.4);
+            opacity: 1;
+        }
+        
+        .view-details-btn {
+            background-color: #FFF4E5;
+            color: #231E1B;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+            opacity: 0;
+            margin-bottom: 10px;
+            min-width: 160px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .product-item:hover .view-details-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .view-details-btn:hover {
+            background-color: #231E1B;
+            color: #FFF4E5;
+            border: 2px solid #FFF4E5;
+            transform: translateY(-3px);
+        }
+        
+        .product-info {
+            padding: 25px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-name {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: #FFF4E5; /* Texto claro para contraste com fundo escuro */
+            font-weight: 600;
+        }
+        
+        .product-category {
+            font-size: 0.9rem;
+            color: #D9CBB6; /* Cor mais clara para categoria */
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FFF4E5; /* Texto claro */
+            margin-bottom: 15px;
+        }
+        
+        .product-description {
+            font-size: 0.9rem;
+            color: #D9CBB6; /* Cor mais clara para descrição */
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .add-to-cart {
+            background-color: #FFF4E5;
+            color: #231E1B;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: auto;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #231E1B;
+            color: #FFF4E5;
+            border: 2px solid #FFF4E5;
+        }
+        
+        .add-to-cart.added {
+            background-color: #2e7d32;
+            color: #FFF4E5;
+        }
+        
+        .product-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #FFF4E5;
+            color: #231E1B;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        /* BOTÃO ÚNICO DE ORÇAMENTO WHATSAPP */
+        .budget-whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            padding: 16px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            z-index: 999;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+        
+        .budget-whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            animation: none;
+        }
+        
+        .budget-whatsapp-btn:active {
+            transform: translateY(-2px);
+        }
+        
+        .budget-whatsapp-icon {
+            font-size: 22px;
+        }
+        
+        .budget-whatsapp-text {
+            white-space: nowrap;
+        }
+        
+        /* Animação de pulsação */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        /* Modal de orçamento */
+        .budget-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            animation: fadeIn 0.3s ease;
+            padding: 20px;
+        }
+        
+        .budget-modal-content {
+            background-color: #FFF4E5;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .budget-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #231E1B;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .budget-modal-title {
+            color: #231E1B;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .budget-product-info {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+        
+        .budget-product-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .budget-product-details h4 {
+            color: #231E1B;
+            margin-bottom: 5px;
+        }
+        
+        .budget-product-details p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .budget-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .form-label {
+            color: #231E1B;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-input, .form-textarea {
+            padding: 12px 15px;
+            border: 1px solid rgba(35, 30, 27, 0.2);
+            border-radius: 8px;
+            background-color: white;
+            font-size: 15px;
+            color: #231E1B;
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #231E1B;
+        }
+        
+        .budget-submit-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .budget-submit-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #231E1B;
+            color: #FFF4E5;
+            padding: 60px 30px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .footer-brand p {
+            font-size: 12px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .footer-contact h3, .footer-social h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 244, 229, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FFF4E5;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .social-btn:hover {
+            background-color: #FFF4E5;
+            color: #231E1B;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 244, 229, 0.1);
+            font-size: 12px;
+            opacity: 0.8;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Responsividade - ATUALIZADA PARA 2 COLUNAS */
+        @media (max-width: 1200px) {
+            .products-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .product-image-container {
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .product-image-container {
+                height: 320px;
+            }
+            
+            .products-title {
+                font-size: 2.4rem;
+            }
+            
+            .budget-whatsapp-btn {
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .products-row {
+                grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
+                gap: 25px;
+                max-width: 500px;
+                margin: 0 auto 40px;
+            }
+            
+            .product-image-container {
+                height: 350px;
+            }
+            
+            .products-title {
+                font-size: 2.2rem;
+            }
+            
+            .logo-img {
+                width: 150px;
+                height: 50px;
+            }
+            
+            .budget-whatsapp-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+            }
+            
+            .budget-whatsapp-text {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .products-title {
+                font-size: 1.9rem;
+            }
+            
+            .product-image-container {
+                height: 280px;
+            }
+            
+            .nav-btn span {
+                display: none;
+            }
+            
+            .nav-btn i {
+                font-size: 22px;
+            }
+            
+            .logo-img {
+                width: 130px;
+                height: 45px;
+            }
+            
+            .product-info {
+                padding: 20px;
+            }
+            
+            .product-name {
+                font-size: 1.2rem;
+            }
+            
+            .budget-whatsapp-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 14px;
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+            }
+            
+            .budget-whatsapp-text {
+                display: none;
+            }
+            
+            .budget-whatsapp-icon {
+                font-size: 24px;
+            }
+            
+            .budget-modal-content {
+                padding: 20px;
+            }
+            
+            .budget-product-info {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .product-image-container {
+                height: 250px;
+            }
+            
+            .products-hero, .products-grid {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .budget-whatsapp-btn {
+                width: 55px;
+                height: 55px;
+            }
+        }
+        
+        /* Animações para notificações */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        /* Animações para modal */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <a href="Tribulê.html" class="logo-btn" id="logoLink">
+                <img src="TribuleIdentidade.jpg" 
+                     class="logo-img"
+                     alt="Studio Tribulê"
+                     onerror="this.src='https://via.placeholder.com/180x60/FFF4E5/231E1B?text=Tribulê+Logo'">
+            </a>
+        </div>
+        
+        <nav class="nav-links">
+            <a href="Produtos.html" class="nav-btn active">
+                <i class="fas fa-gem"></i>
+                <span>Produtos</span>
+            </a>
+            <a href="Coleções.html" class="nav-btn">
+                <i class="fas fa-palette"></i>
+                <span>Coleções</span>
+            </a>
+            <a href="SobreNós.html" class="nav-btn">
+                <i class="fas fa-users"></i>
+                <span>Sobre Nós</span>
+            </a>
+            <a href="Carrinho.html" class="nav-btn nav-btn-cart">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Carrinho</span>
+                <span id="cart-badge" class="cart-badge">0</span>
+            </a>
+        </nav>
+    </header>
+    
+    <!-- Seção principal de produtos -->
+    <section class="products-hero">
+        <h1 class="products-title">Nossa Coleção Completa</h1>
+        <p class="products-subtitle">
+            Explore nossa seleção exclusiva de joias artesanais. Cada peça é cuidadosamente 
+            elaborada para contar uma história única e especial.
+        </p>
+    </section>
+    
+    <!-- Grid de produtos (10 produtos no total) -->
+    <section class="products-grid">
+        <!-- Fileira 1 - 2 produtos -->
+        <div class="products-row">
+            <!-- Produto 1: Anel de Bolinhas -->
+            <div class="product-item">
+                <div class="product-tag">Mais Vendido</div>
+                <div class="product-image-container">
+                  <img src="Bolinhas clara.jpg" 
+                         alt="Anel de Bolinhas" class="product-image">
+                    <div class="product-overlay">
+                        <button class="view-details-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-name">Anel de Bolinhas</h3>
+                    <span class="product-category">Anéis • Cobre 920</span>
+                    <p class="product-price">R$ 150,00</p>
+                    <p class="product-description">Anel produzido com técnica de aquecimento para criar textura única e orgânica.</p>
+                    <button class="add-to-cart" 
+                            data-product-id="prod-001" 
+                            data-product-name="Anel de Bolinhas" 
+                            data-product-price="150.00" 
+                            data-product-image="Bolinhas clara.jpg" 
+                            data-product-description="Anel produzido com técnica de aquecimento para criar textura única e orgânica." 
+                            data-product-category="Anéis • Cobre 920">
+                        Adicionar ao Carrinho
+                    </button>
+              </div>
+            </div>
+            
+            <!-- Produto 2: Coraçãozinho -->
+            <div class="product-item">
+                <div class="product-tag">Novidade</div>
+                <div class="product-image-container">
+                  <img src="coracaozinho.jpg" 
+                         alt="Anel Coraçãozinho" class="product-image">
+                    <div class="product-overlay">
+                        <button class="view-details-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Coraçãozinho</h3>
+                    <span class="product-category">Anéis • Cobre 920</span>
+                  <p class="product-price">R$ 140,00</p>
+                    <p class="product-description">Anel fabricado com técnica de torção, criado utilizando moldes de cera para um design único e personalizado.</p>
+                    <button class="add-to-cart" 
+                            data-product-id="prod-002" 
+                            data-product-name="Coraçãozinho" 
+                            data-product-price="140.00" 
+                            data-product-image="coracaozinho.jpg" 
+                            data-product-description="Anel fabricado com técnica de torção, criado utilizando moldes de cera para um design único e personalizado." 
+                            data-product-category="Anéis • Cobre 920">
+                        Adicionar ao Carrinho
+                    </button>
+              </div>
+            </div>
+        </div>
+        
+        <!-- Fileira 2 - 2 produtos -->
+        <div class="products-row">
+            <!-- Produto 3: Lacinho -->
+            <div class="product-item">
+                <div class="product-image-container">
+                    <img src="Lacinho.jpg" 
+                         alt="Anel Lacinho" class="product-image">
+                    <div class="product-overlay">
+                        <button class="view-details-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-name">Lacinho</h3>
+                    <span class="product-category">Anéis • Prata 925 • Cobre</span>
+                    <p class="product-price">R$ 180,00</p>
+                    <p class="product-description">Feito com a técnica de torcer o metal, as formas orgânicas representam os valores da marca.</p>
+                    <button class="add-to-cart" 
+                            data-product-id="prod-003" 
+                            data-product-name="Lacinho" 
+                            data-product-price="180.00" 
+                            data-product-image="Lacinho.jpg" 
+                            data-product-description="Feito com a técnica de torcer o metal, as formas orgânicas representam os valores da marca." 
+                            data-product-category="Anéis • Prata 925 • Cobre">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Produto 4: Ondinha -->
+            <div class="product-item">
+                <div class="product-tag">Exclusivo</div>
+                <div class="product-image-container">
+                    <img src="ondinha (1).jpg" 
+                         alt="Anel Ondinha" class="product-image">
+                    <div class="product-overlay">
+                        <button class="view-details-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Ondinha</h3>
+                    <span class="product-category">Anéis • Prata 925</span>
+                    <p class="product-price">R$ 160,00</p>
+                    <p class="product-description">Design orgânico e linear com técnica de torcer o anel, uma bela peça que reproduz o movimento de ondas.</p>
+                    <button class="add-to-cart" 
+                            data-product-id="prod-004" 
+                            data-product-name="Ondinha" 
+                            data-product-price="160.00" 
+                            data-product-image="ondinha (1).jpg" 
+                            data-product-description="Design orgânico e linear com técnica de torcer o anel, uma bela peça que reproduz o movimento de ondas." 
+                            data-product-category="Anéis • Prata 925">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fileira 3 - 2 produtos -->
+        <div class="products-row">
+            <!-- Produto 5: Orgânico Clara -->
+            <div class="product-item">
+                <div class="product-image-container">
+                    <img src="Organico Clara (1).jpg" 
+                         alt="Anel Orgânico Clara" class="product-image">
+                    <div class="product-overlay">
+                        <button class="view-details-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Orgânico Clara</h3>
+                    <span class="product-category">Anéis • Prata 925</span>
+                    <p class="product-price">R$ 175,00</p>
+                    <p class="product-description">Anel com design orgânico inspirado na natureza, feito com técnica artesanal e atenção aos detalhes.</p>
+                    <button class="add-to-cart" 
+                            data-product-id="prod-005" 
+                            data-product-name="Orgânico Clara" 
+                            data-product-price="175.00" 
+                            data-product-image="Organico Clara (1).jpg" 
+                            data-product-description="Anel com design orgânico inspirado na natureza, feito com técnica artesanal e atenção aos detalhes." 
+                            data-product-category="Anéis • Prata 925">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Produto 6: Orgânico Flo -->
+            <div class="product-item">
+                <div class="product-tag">Limitado</div>
+                <div class="product-image-container">
+                    <img src="Organico flo (1).jpg" 
+                         alt="Anel Orgânico Flo" class="product-image">
+                    <div class="product-overlay">
+                        <button class="view-details-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Orgânico Flo</h3>
+                    <span class="product-category">Anéis • Prata 925</span>
+                    <p class="product-price">R$ 170,00</p>
+                    <p class="product-description">Design fluido e natural, criado com técnica de modelagem manual para um efeito único e exclusivo.</p>
+                    <button class="add-to-cart" 
+                            data-product-id="prod-006" 
+                            data-product-name="Orgânico Flo" 
+                            data-product-price="170.00" 
+                            data-product-image="Organico flo (1).jpg" 
+                            data-product-description="Design fluido e natural, criado com técnica de modelagem manual para um efeito único e exclusivo." 
+                            data-product-category="Anéis • Prata 925">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fileira 4 - 2 produtos -->
+        <div class="products-row">
+            <!-- Produto 7: Redondinho -->
+            <div class="product-item">
+                <div class="product-tag">Esgotando</div>
+                <div class="product-image-container">
+                    <img src="Redondinho (1).jpg" 
+                         alt="Anel Redondinho" class="product-image">
+                    <div class="product-overlay">
+                        <button class="view-details-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Redondinho</h3>
+                    <span class="product-category">Anéis • Cobre 920</span>
+                    <p class="product-price">R$ 130,00</p>
+                    <p class="product-description">Design circular suave com acabamento perfeito, ideal para uso diário e combinações diversas.</p>
+                    <button class="add-to-cart" 
+                            data-product-id="prod-007" 
+                            data-product-name="Redondinho" 
+                            data-product-price="130.00" 
+                            data-product-image="Redondinho (1).jpg" 
+                            data-product-description="Design circular suave com acabamento perfeito, ideal para uso diário e combinações diversas." 
+                            data-product-category="Anéis • Cobre 920">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Produto 8: Spiral -->
+            <div class="product-item">
+                <div class="product-image-container">
+                    <img src="spiral (1).jpg" 
+                         alt="Anel Spiral" class="product-image">
+                    <div class="product-overlay">
+                        <button class="view-details-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Spiral</h3>
+                    <span class="product-category">Anéis • Prata 925</span>
+                    <p class="product-price">R$ 190,00</p>
+                    <p class="product-description">Design espiralado que representa crescimento e evolução, com detalhes precisos e acabamento impecável.</p>
+                    <button class="add-to-cart" 
+                            data-product-id="prod-008" 
+                            data-product-name="Spiral" 
+                            data-product-price="190.00" 
+                            data-product-image="spiral (1).jpg" 
+                            data-product-description="Design espiralado que representa crescimento e evolução, com detalhes precisos e acabamento impecável." 
+                            data-product-category="Anéis • Prata 925">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fileira 5 - 2 produtos (para completar 10) -->
+        <div class="products-row">
+            <!-- Produto 9: Torcidinhos em Pé -->
+            <div class="product-item">
+                <div class="product-tag">Novidade</div>
+                <div class="product-image-container">
+                    <img src="torcidinhos em pe.jpg" alt="Anel Torcidinhos em Pé" class="product-image">
+                    <div class="product-overlay">
+                        <button class="view-details-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Torcidinhos em Pé</h3>
+                    <span class="product-category">Anéis • Cobre 920</span>
+                    <p class="product-price">R$ 155,00</p>
+                    <p class="product-description">Anel com torções verticais que criam um efeito tridimensional único e moderno.</p>
+                    <button class="add-to-cart" 
+                            data-product-id="prod-009" 
+                            data-product-name="Torcidinhos em Pé" 
+                            data-product-price="155.00" 
+                            data-product-image="torcidinhos em pe.jpg" 
+                            data-product-description="Anel com torções verticais que criam um efeito tridimensional único e moderno." 
+                            data-product-category="Anéis • Cobre 920">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Produto 10: Trio Cravadinho -->
+            <div class="product-item">
+                <div class="product-image-container">
+                    <img src="Trio.jpg" 
+                         alt="Anéis Trio Cravadinho" class="product-image">
+                    <div class="product-overlay">
+                        <button class="view-details-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Trio Cravadinho</h3>
+                    <span class="product-category">Conjunto de Anéis • Prata 925</span>
+                    <p class="product-price">R$ 350,00</p>
+                    <p class="product-description">Conjunto de três anéis com detalhes cravejados, perfeito para criar looks elegantes e sofisticados.</p>
+                    <button class="add-to-cart" 
+                            data-product-id="prod-010" 
+                            data-product-name="Trio Cravadinho fila (1).jpg" 
+                            data-product-price="350.00" 
+                            data-product-image="trio cravadinho fila (1).jpg" 
+                            data-product-description="Conjunto de três anéis com detalhes cravejados, perfeito para criar looks elegantes e sofisticados." 
+                            data-product-category="Conjunto de Anéis • Prata 925">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Botão ÚNICO flutuante de WhatsApp -->
+    <button class="budget-whatsapp-btn" id="budgetWhatsappBtn">
+        <i class="fab fa-whatsapp budget-whatsapp-icon"></i>
+        <span class="budget-whatsapp-text">Fazer Orçamento</span>
+    </button>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>Tribulê</h2>
+                <p>Joias que contam histórias, criadas com paixão e atenção aos detalhes desde 2025.</p>
+                <p>Todos os direitos reservados desenvolvidos pela arte da joalheria.</p>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> (11) 9999-9999</p>
+                    <p><i class="fas fa-envelope"></i> contato@studiotribule.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Higienópolis, São Paulo, Brasil</p>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <h3>Siga-nos</h3>
+                <div class="social-links">
+                    <a href="https://instagram.com/studiotribule" target="_blank" class="social-btn">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/studiotribule" target="_blank" class="social-btn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://facebook.com/studiotribule" target="_blank" class="social-btn">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Studio Tribulê. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== SISTEMA DE CARRINHO PARA PRODUTOS 1.HTML =====
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Página 1 de Produtos carregada');
+            
+            // ============================================
+            // 1. SISTEMA DE BADGE DO CARRINHO
+            // ============================================
+            
+            // Função para atualizar o badge do carrinho
+            function updateCartBadge() {
+                try {
+                    // Carregar carrinho do localStorage
+                    const cartData = localStorage.getItem('tribule_cart');
+                    let itemCount = 0;
+                    
+                    if (cartData) {
+                        const cartItems = JSON.parse(cartData);
+                        // Somar quantidades de todos os itens
+                        itemCount = cartItems.reduce((total, item) => {
+                            return total + (item.quantity || 1);
+                        }, 0);
+                    }
+                    
+                    // Atualizar badge
+                    const badge = document.getElementById('cart-badge');
+                    if (badge) {
+                        if (itemCount > 0) {
+                            badge.textContent = itemCount;
+                            badge.style.display = 'flex';
+                        } else {
+                            badge.style.display = 'none';
+                        }
+                    }
+                    
+                    console.log(`Badge atualizado: ${itemCount} itens`);
+                } catch (error) {
+                    console.error('Erro ao atualizar badge:', error);
+                }
+            }
+            
+            // Atualizar badge inicial
+            updateCartBadge();
+            
+            // Ouvir mudanças no localStorage
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'tribule_cart') {
+                    console.log('Carrinho atualizado em outra aba, atualizando badge...');
+                    updateCartBadge();
+                }
+            });
+            
+            // ============================================
+            // 2. SISTEMA DE ADICIONAR AO CARRINHO
+            // ============================================
+            
+            // Função para adicionar produto ao carrinho
+            function addProductToCart(productId, productName, productPrice, productImage, productDescription, productCategory) {
+                try {
+                    console.log(`Adicionando produto ao carrinho: ${productName}`);
+                    
+                    // Criar objeto do produto
+                    const product = {
+                        id: productId,
+                        name: productName,
+                        price: productPrice,
+                        image: productImage,
+                        description: productDescription,
+                        category: productCategory,
+                        quantity: 1
+                    };
+                    
+                    // Salvar produto temporariamente
+                    localStorage.setItem(`tribule_temp_product_${productId}`, JSON.stringify(product));
+                    
+                    // Mostrar notificação de sucesso
+                    showNotification('Produto adicionado!', `${productName} foi adicionado ao carrinho`, 'success');
+                    
+                    // Atualizar badge
+                    updateCartBadge();
+                    
+                    // Redirecionar para o carrinho após 1 segundo
+                    setTimeout(() => {
+                        window.location.href = `Carrinho.html?add=${productId}`;
+                    }, 1000);
+                    
+                    return true;
+                } catch (error) {
+                    console.error('Erro ao adicionar produto:', error);
+                    showNotification('Erro', 'Não foi possível adicionar o produto ao carrinho', 'error');
+                    return false;
+                }
+            }
+            
+            // ============================================
+            // 3. CONFIGURAR BOTÕES "ADICIONAR AO CARRINHO"
+            // ============================================
+            
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    console.log('Botão "Adicionar ao Carrinho" clicado');
+                    
+                    // Obter dados do produto dos atributos data
+                    const productId = this.getAttribute('data-product-id');
+                    const productName = this.getAttribute('data-product-name');
+                    const productPrice = parseFloat(this.getAttribute('data-product-price'));
+                    const productImage = this.getAttribute('data-product-image');
+                    const productDescription = this.getAttribute('data-product-description');
+                    const productCategory = this.getAttribute('data-product-category');
+                    
+                    console.log(`Dados do produto: ${productName}, R$ ${productPrice.toFixed(2)}`);
+                    
+                    // Feedback visual no botão
+                    const originalText = this.textContent;
+                    const originalBgColor = this.style.backgroundColor;
+                    
+                    this.textContent = '✓ Adicionado!';
+                    this.style.backgroundColor = '#2e7d32';
+                    this.disabled = true;
+                    
+                    // Adicionar produto ao carrinho
+                    addProductToCart(
+                        productId,
+                        productName,
+                        productPrice,
+                        productImage,
+                        productDescription,
+                        productCategory
+                    );
+                    
+                    // Restaurar botão após 2 segundos (caso o redirecionamento falhe)
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.backgroundColor = originalBgColor;
+                        this.disabled = false;
+                    }, 2000);
+                });
+            });
+            
+            // ============================================
+            // 4. CONFIGURAR BOTÕES "VER DETALHES"
+            // ============================================
+            
+            const viewButtons = document.querySelectorAll('.view-details-btn');
+            
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    console.log('Botão "Ver Detalhes" clicado');
+                    
+                    // Encontrar os dados do produto
+                    const productItem = this.closest('.product-item');
+                    
+                    // Obter dados do produto
+                    const productName = productItem.querySelector('.product-name').textContent;
+                    const productPrice = productItem.querySelector('.product-price').textContent;
+                    const productImage = productItem.querySelector('.product-image').src;
+                    const productDescription = productItem.querySelector('.product-description').textContent;
+                    const productCategory = productItem.querySelector('.product-category').textContent;
+                    
+                    // Salvar produto como focado para orçamento
+                    const focusedProduct = {
+                        id: 'prod-' + Date.now(),
+                        name: productName,
+                        price: parseFloat(productPrice.replace('R$ ', '').replace('.', '').replace(',', '.')),
+                        image: productImage,
+                        description: productDescription,
+                        category: productCategory
+                    };
+                    
+                    localStorage.setItem('tribule_focused_product', JSON.stringify(focusedProduct));
+                    
+                    // Mostrar modal com detalhes do produto
+                    showProductDetailsModal(
+                        productName,
+                        productPrice,
+                        productImage,
+                        productDescription,
+                        productCategory
+                    );
+                });
+            });
+            
+            // ============================================
+            // 5. BOTÃO ÚNICO DE ORÇAMENTO
+            // ============================================
+            
+            const budgetWhatsappBtn = document.getElementById('budgetWhatsappBtn');
+            
+            // Configurar botão de orçamento
+            budgetWhatsappBtn.addEventListener('click', function() {
+                showBudgetModal();
+            });
+            
+            // ============================================
+            // 6. FUNÇÕES AUXILIARES
+            // ============================================
+            
+            // Função para mostrar notificações
+            function showNotification(title, message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background-color: ${type === 'success' ? '#2e7d32' : type === 'error' ? '#c62828' : '#231E1B'};
+                    color: #FFF4E5;
+                    padding: 15px 20px;
+                    border-radius: 5px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    z-index: 10000;
+                    max-width: 300px;
+                    animation: slideIn 0.3s ease-out;
+                    border-left: 4px solid #FFF4E5;
+                `;
+                
+                notification.innerHTML = `
+                    <strong>${title}</strong>
+                    <p style="margin: 5px 0 0; font-size: 14px;">${message}</p>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Remover após 3 segundos
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-in';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+            
+            // Função para mostrar detalhes do produto em modal
+            function showProductDetailsModal(name, price, image, description, category) {
+                // Criar modal
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,0.8);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 10000;
+                    animation: fadeIn 0.3s ease;
+                    padding: 20px;
+                `;
+                
+                modal.innerHTML = `
+                    <div style="background-color: #FFF4E5; border-radius: 15px; max-width: 500px; width: 100%; padding: 30px; position: relative; max-height: 90vh; overflow-y: auto;">
+                        <button id="close-modal" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #231E1B; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">&times;</button>
+                        <img src="${image}" alt="${name}" style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 20px;">
+                        <h3 style="color: #231E1B; margin-bottom: 10px; font-size: 1.5rem;">${name}</h3>
+                        <p style="color: #666; margin-bottom: 10px; font-size: 0.9rem;">${category}</p>
+                        <p style="color: #231E1B; font-size: 1.3rem; font-weight: bold; margin-bottom: 20px;">${price}</p>
+                        <p style="color: #666; margin-bottom: 25px; line-height: 1.6;">${description}</p>
+                        <div style="display: flex; gap: 10px;">
+                            <button id="modal-add-to-cart" style="flex: 1; padding: 15px; background-color: #231E1B; color: #FFF4E5; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 16px;">
+                                Adicionar ao Carrinho
+                            </button>
+                            <button id="modal-budget" style="flex: 1; padding: 15px; background-color: #25D366; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                <i class="fab fa-whatsapp"></i> Orçamento
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Fechar modal ao clicar no X
+                const closeBtn = modal.querySelector('#close-modal');
+                closeBtn.addEventListener('click', () => {
+                    localStorage.removeItem('tribule_focused_product');
+                    modal.style.animation = 'fadeOut 0.3s ease';
+                    setTimeout(() => {
+                        if (modal.parentNode) {
+                            document.body.removeChild(modal);
+                        }
+                    }, 300);
+                });
+                
+                // Fechar modal ao clicar fora
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        localStorage.removeItem('tribule_focused_product');
+                        modal.style.animation = 'fadeOut 0.3s ease';
+                        setTimeout(() => {
+                            if (modal.parentNode) {
+                                document.body.removeChild(modal);
+                            }
+                        }, 300);
+                    }
+                });
+                
+                // Configurar botão "Adicionar ao Carrinho" no modal
+                const modalAddToCartBtn = modal.querySelector('#modal-add-to-cart');
+                modalAddToCartBtn.addEventListener('click', function() {
+                    // Gerar um ID único para o produto
+                    const productId = 'prod-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+                    
+                    // Converter preço para número
+                    const priceNumber = parseFloat(price.replace('R$ ', '').replace('.', '').replace(',', '.'));
+                    
+                    // Adicionar ao carrinho
+                    addProductToCart(
+                        productId,
+                        name,
+                        priceNumber,
+                        image,
+                        description,
+                        category
+                    );
+                    
+                    // Fechar modal após adicionar
+                    setTimeout(() => {
+                        localStorage.removeItem('tribule_focused_product');
+                        if (modal.parentNode) {
+                            modal.style.animation = 'fadeOut 0.3s ease';
+                            setTimeout(() => {
+                                if (modal.parentNode) {
+                                    document.body.removeChild(modal);
+                                }
+                            }, 300);
+                        }
+                    }, 800);
+                });
+                
+                // Configurar botão "Orçamento" no modal
+                const modalBudgetBtn = modal.querySelector('#modal-budget');
+                modalBudgetBtn.addEventListener('click', function() {
+                    // Converter preço para número
+                    const priceNumber = parseFloat(price.replace('R$ ', '').replace('.', '').replace(',', '.'));
+                    
+                    // Fechar modal atual
+                    modal.style.animation = 'fadeOut 0.3s ease';
+                    setTimeout(() => {
+                        if (modal.parentNode) {
+                            document.body.removeChild(modal);
+                        }
+                        
+                        // Mostrar modal de orçamento
+                        showBudgetModal(
+                            'prod-' + Date.now(),
+                            name,
+                            priceNumber,
+                            image,
+                            description,
+                            category
+                        );
+                    }, 300);
+                });
+            }
+            
+            // Função para mostrar modal de orçamento
+            function showBudgetModal(productId = null, productName = null, productPrice = null, productImage = null, productDescription = null, productCategory = null) {
+                // Verificar se há um produto focado
+                const focusedProductData = localStorage.getItem('tribule_focused_product');
+                let productData = null;
+                
+                if (focusedProductData) {
+                    try {
+                        productData = JSON.parse(focusedProductData);
+                    } catch (error) {
+                        console.log('Erro ao analisar produto focado');
+                    }
+                }
+                
+                // Se não houver produto focado, usar os parâmetros fornecidos
+                if (!productData && productId) {
+                    productData = {
+                        id: productId,
+                        name: productName,
+                        price: productPrice,
+                        image: productImage,
+                        description: productDescription,
+                        category: productCategory
+                    };
+                }
+                
+                // Criar modal de orçamento
+                const modal = document.createElement('div');
+                modal.className = 'budget-modal';
+                
+                // Texto para o modal baseado se há produto específico
+                let productText = '';
+                let modalTitle = 'Solicitar Orçamento';
+                
+                if (productData) {
+                    productText = `
+                        <div class="budget-product-info">
+                            <img src="${productData.image}" alt="${productData.name}" class="budget-product-image">
+                            <div class="budget-product-details">
+                                <h4>${productData.name}</h4>
+                                <p>${productData.category}</p>
+                                <p style="color: #231E1B; font-weight: bold;">R$ ${productData.price.toFixed(2).replace('.', ',')}</p>
+                            </div>
+                        </div>
+                    `;
+                    modalTitle = `Orçamento: ${productData.name}`;
+                }
+                
+                modal.innerHTML = `
+                    <div class="budget-modal-content">
+                        <button class="budget-modal-close">&times;</button>
+                        <h3 class="budget-modal-title">${modalTitle}</h3>
+                        
+                        ${productText}
+                        
+                        <p style="color: #666; margin-bottom: 20px; font-size: 14px;">Preencha os dados abaixo para solicitar um orçamento personalizado. Entraremos em contato via WhatsApp.</p>
+                        
+                        <form class="budget-form" id="budgetForm">
+                            <div class="form-group">
+                                <label class="form-label" for="budgetName">Nome Completo *</label>
+                                <input type="text" id="budgetName" class="form-input" placeholder="Digite seu nome" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="budgetPhone">WhatsApp *</label>
+                                <input type="tel" id="budgetPhone" class="form-input" placeholder="(11) 99999-9999" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="budgetEmail">E-mail</label>
+                                <input type="email" id="budgetEmail" class="form-input" placeholder="seu@email.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="budgetMessage">Mensagem</label>
+                                <textarea id="budgetMessage" class="form-textarea" placeholder="Informações adicionais, dúvidas ou personalizações desejadas..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="budget-submit-btn">
+                                <i class="fab fa-whatsapp"></i> Enviar Orçamento via WhatsApp
+                            </button>
+                        </form>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Fechar modal ao clicar no X
+                const closeBtn = modal.querySelector('.budget-modal-close');
+                closeBtn.addEventListener('click', () => {
+                    localStorage.removeItem('tribule_focused_product');
+                    modal.style.animation = 'fadeOut 0.3s ease';
+                    setTimeout(() => {
+                        if (modal.parentNode) {
+                            document.body.removeChild(modal);
+                        }
+                    }, 300);
+                });
+                
+                // Fechar modal ao clicar fora
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        localStorage.removeItem('tribule_focused_product');
+                        modal.style.animation = 'fadeOut 0.3s ease';
+                        setTimeout(() => {
+                            if (modal.parentNode) {
+                                document.body.removeChild(modal);
+                            }
+                        }, 300);
+                    }
+                });
+                
+                // Configurar envio do formulário
+                const budgetForm = modal.querySelector('#budgetForm');
+                budgetForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Obter valores do formulário
+                    const name = document.getElementById('budgetName').value;
+                    const phone = document.getElementById('budgetPhone').value;
+                    const email = document.getElementById('budgetEmail').value;
+                    const message = document.getElementById('budgetMessage').value;
+                    
+                    // Validar campos obrigatórios
+                    if (!name || !phone) {
+                        showNotification('Atenção', 'Por favor, preencha pelo menos nome e WhatsApp', 'error');
+                        return;
+                    }
+                    
+                    // Formatar número de telefone (remover caracteres não numéricos)
+                    const formattedPhone = phone.replace(/\D/g, '');
+                    
+                    // Montar mensagem para WhatsApp
+                    let whatsappMessage = `*Solicitação de Orçamento - Studio Tribulê*\n\n`;
+                    whatsappMessage += `*Cliente:* ${name}\n`;
+                    if (email) whatsappMessage += `*E-mail:* ${email}\n`;
+                    
+                    if (productData) {
+                        whatsappMessage += `\n*Produto de Interesse:* ${productData.name}\n`;
+                        whatsappMessage += `*Categoria:* ${productData.category}\n`;
+                        whatsappMessage += `*Preço de Referência:* R$ ${productData.price.toFixed(2).replace('.', ',')}\n`;
+                    }
+                    
+                    if (message) {
+                        whatsappMessage += `\n*Mensagem do Cliente:*\n${message}\n`;
+                    }
+                    
+                    whatsappMessage += `\n*Data:* ${new Date().toLocaleDateString('pt-BR')}\n`;
+                    whatsappMessage += `\n---\n`;
+                    whatsappMessage += `_Esta solicitação foi enviada através do site do Studio Tribulê_`;
+                    
+                    // Codificar mensagem para URL
+                    const encodedMessage = encodeURIComponent(whatsappMessage);
+                    
+                    // Número do WhatsApp
+                    const whatsappNumber = '5511999999999';
+                    
+                    // Criar URL do WhatsApp
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                    
+                    // Abrir WhatsApp em nova aba
+                    window.open(whatsappUrl, '_blank');
+                    
+                    // Fechar modal
+                    modal.style.animation = 'fadeOut 0.3s ease';
+                    setTimeout(() => {
+                        if (modal.parentNode) {
+                            document.body.removeChild(modal);
+                        }
+                        
+                        // Mostrar notificação de sucesso
+                        showNotification('Orçamento enviado!', 'Agora você será redirecionado para o WhatsApp', 'success');
+                        
+                        // Limpar produto focado
+                        localStorage.removeItem('tribule_focused_product');
+                    }, 300);
+                });
+                
+                // Adicionar máscara para telefone
+                const phoneInput = modal.querySelector('#budgetPhone');
+                if (phoneInput) {
+                    phoneInput.addEventListener('input', function(e) {
+                        let value = this.value.replace(/\D/g, '');
+                        
+                        if (value.length > 11) {
+                            value = value.substring(0, 11);
+                        }
+                        
+                        if (value.length > 10) {
+                            // Formato: (00) 00000-0000
+                            value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+                        } else if (value.length > 6) {
+                            // Formato: (00) 0000-0000
+                            value = value.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
+                        } else if (value.length > 2) {
+                            value = value.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
+                        } else if (value.length > 0) {
+                            value = value.replace(/^(\d*)$/, '($1');
+                        }
+                        
+                        this.value = value;
+                    });
+                }
+            }
+            
+            // ============================================
+            // 7. CONFIGURAÇÕES ADICIONAIS DA PÁGINA
+            // ============================================
+            
+            // Ativar botão de produtos no menu
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            
+            const produtosBtn = document.querySelector('a[href="Produtos.html"]');
+            if (produtosBtn) {
+                produtosBtn.classList.add('active');
+            }
+            
+            // Configurar link do logo
+            const logoLink = document.getElementById('logoLink');
+            if (logoLink) {
+                logoLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = 'Tribulê.html';
+                });
+            }
+            
+            // Limpar produto focado ao sair da página
+            window.addEventListener('beforeunload', function() {
+                localStorage.removeItem('tribule_focused_product');
+            });
+            
+            console.log('Página de Produtos configurada com sucesso - Layout de duplas com cards escuros');
+        });
+    </script>
+</body>
+</html>

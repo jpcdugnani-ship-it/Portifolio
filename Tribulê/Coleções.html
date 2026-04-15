@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coleções - Studio Tribulê</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset e estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #FFF4E5;
+            color: #231E1B;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background-color: #231E1B;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 180px;
+            height: 60px;
+            border-radius: 5px;
+            object-fit: cover;
+            border: 2px solid #FFF4E5;
+            transition: transform 0.3s;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #FFF4E5;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 244, 229, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn i {
+            font-size: 18px;
+        }
+        
+        .nav-btn.active {
+            background-color: rgba(255, 244, 229, 0.15);
+        }
+        
+        /* Seção principal de coleções */
+        .collections-hero {
+            padding: 40px 30px 30px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .collections-title {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #231E1B;
+        }
+        
+        .collections-subtitle {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #231E1B;
+            opacity: 0.8;
+        }
+        
+        /* Grid de coleções - 6 quadrados */
+        .collections-grid {
+            padding: 0 30px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .collections-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            margin-bottom: 40px;
+        }
+        
+        .collection-item {
+            background-color: #FFF4E5;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid rgba(35, 30, 27, 0.1);
+            height: 100%;
+        }
+        
+        .collection-item:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .collection-image-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .collection-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: all 0.5s ease;
+        }
+        
+        .collection-item:hover .collection-image {
+            transform: scale(1.05);
+            filter: brightness(0.8);
+        }
+        
+        .collection-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(35, 30, 27, 0);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s ease;
+            opacity: 0;
+            padding: 20px;
+        }
+        
+        .collection-item:hover .collection-overlay {
+            background-color: rgba(35, 30, 27, 0.3);
+            opacity: 1;
+        }
+        
+        .view-collection-btn {
+            background-color: #FFF4E5;
+            color: #231E1B;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+            opacity: 0;
+            margin-bottom: 15px;
+            min-width: 180px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .collection-item:hover .view-collection-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .view-collection-btn:hover {
+            background-color: #231E1B;
+            color: #FFF4E5;
+            transform: translateY(-3px);
+        }
+        
+        .collection-info {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .collection-name {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: #231E1B;
+            font-weight: 600;
+        }
+        
+        .collection-season {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 500;
+        }
+        
+        .collection-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .collection-count {
+            display: inline-block;
+            background-color: #231E1B;
+            color: #FFF4E5;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .collection-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #231E1B;
+            color: #FFF4E5;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            z-index: 2;
+        }
+        
+        /* BOTÃO DE ORÇAMENTO WHATSAPP (Canto inferior DIREITO) */
+        .budget-whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            padding: 16px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            z-index: 999;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+        
+        .budget-whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            animation: none;
+        }
+        
+        .budget-whatsapp-btn:active {
+            transform: translateY(-2px);
+        }
+        
+        .budget-whatsapp-icon {
+            font-size: 22px;
+        }
+        
+        .budget-whatsapp-text {
+            white-space: nowrap;
+        }
+        
+        /* Modal de orçamento */
+        .budget-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            animation: fadeIn 0.3s ease;
+            padding: 20px;
+        }
+        
+        .budget-modal-content {
+            background-color: #FFF4E5;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .budget-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #231E1B;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .budget-modal-title {
+            color: #231E1B;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .budget-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .form-label {
+            color: #231E1B;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-input, .form-textarea {
+            padding: 12px 15px;
+            border: 1px solid rgba(35, 30, 27, 0.2);
+            border-radius: 8px;
+            background-color: white;
+            font-size: 15px;
+            color: #231E1B;
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #231E1B;
+        }
+        
+        .budget-submit-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .budget-submit-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        /* Animação de pulsação para o botão */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #231E1B;
+            color: #FFF4E5;
+            padding: 60px 30px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .footer-brand p {
+            font-size: 12px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .footer-contact h3, .footer-social h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 244, 229, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FFF4E5;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .social-btn:hover {
+            background-color: #FFF4E5;
+            color: #231E1B;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 244, 229, 0.1);
+            font-size: 12px;
+            opacity: 0.8;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Badge de quantidade no carrinho */
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .nav-btn-cart {
+            position: relative;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            .collections-row {
+                gap: 30px;
+            }
+            
+            .collection-image-container {
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .collection-image-container {
+                height: 300px;
+            }
+            
+            .collections-title {
+                font-size: 2.4rem;
+            }
+            
+            .budget-whatsapp-btn {
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .collections-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+                max-width: 600px;
+                margin: 0 auto 40px;
+            }
+            
+            .collection-image-container {
+                height: 350px;
+            }
+            
+            .collections-title {
+                font-size: 2.2rem;
+            }
+            
+            .logo-img {
+                width: 150px;
+                height: 50px;
+            }
+            
+            .budget-whatsapp-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+            }
+            
+            .budget-whatsapp-text {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .collections-title {
+                font-size: 1.9rem;
+            }
+            
+            .collection-image-container {
+                height: 280px;
+            }
+            
+            .nav-btn span {
+                display: none;
+            }
+            
+            .nav-btn i {
+                font-size: 22px;
+            }
+            
+            .logo-img {
+                width: 130px;
+                height: 45px;
+            }
+            
+            .collection-info {
+                padding: 20px;
+            }
+            
+            .collection-name {
+                font-size: 1.3rem;
+            }
+            
+            .collections-row {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+            
+            .budget-whatsapp-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 14px;
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+            }
+            
+            .budget-whatsapp-text {
+                display: none;
+            }
+            
+            .budget-whatsapp-icon {
+                font-size: 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .collection-image-container {
+                height: 250px;
+            }
+            
+            .collections-hero, .collections-grid {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .budget-whatsapp-btn {
+                width: 55px;
+                height: 55px;
+            }
+        }
+        
+        /* Animações para notificações */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <!-- Botão do logo que leva para Tribulê.html -->
+            <a href="Tribulê.html" class="logo-btn" id="logoLink">
+                <img src="TribuleIdentidade.jpg" 
+                     class="logo-img"
+                     alt="Studio Tribulê"
+                     onerror="this.src='https://via.placeholder.com/180x60/FFF4E5/231E1B?text=Tribulê+Logo'">
+            </a>
+        </div>
+        
+        <nav class="nav-links">
+            <!-- Botões do header que levam às páginas nomeadas -->
+            <a href="Produtos.html" class="nav-btn">
+                <i class="fas fa-gem"></i>
+                <span>Produtos</span>
+            </a>
+            <a href="Coleções.html" class="nav-btn active">
+                <i class="fas fa-palette"></i>
+                <span>Coleções</span>
+            </a>
+            <a href="SobreNós.html" class="nav-btn">
+                <i class="fas fa-users"></i>
+                <span>Sobre Nós</span>
+            </a>
+            <a href="Carrinho.html" class="nav-btn nav-btn-cart">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Carrinho</span>
+                <span id="cart-badge" class="cart-badge" style="display: none;">0</span>
+            </a>
+        </nav>
+    </header>
+    
+    <!-- Seção principal de coleções -->
+    <section class="collections-hero">
+        <h1 class="collections-title">Nossas Coleções Exclusivas</h1>
+        <p class="collections-subtitle">
+            Cada coleção conta uma história única, inspirada em momentos especiais e 
+            elaborada com maestria pelos nossos artesãos. Descubra a essência da Tribulê.
+        </p>
+    </section>
+    
+    <!-- Grid de coleções (6 quadrados) -->
+    <section class="collections-grid">
+        <!-- Primeira linha com 3 coleções -->
+        <div class="collections-row">
+            <!-- Coleção 1 -->
+            <div class="collection-item">
+                <div class="collection-tag">Primavera 2025</div>
+                <div class="collection-image-container">
+                    <img src="mao com todos os dourados.jpg" 
+                         alt="Coleção Piloto" class="collection-image">
+                    <div class="collection-overlay">
+                        <a href="Piloto.html" class="view-collection-btn">Explorar Coleção</a>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3 class="collection-name">Piloto&nbsp;</h3>
+                    <span class="collection-season">Primavera 2025&nbsp;</span>
+                    <p class="collection-description">
+                    Uma coleção de nossos primeiros trabalhos enquanto empresa, capturando nossa essência de vários estilos e trazendo um grande estilo.&nbsp; &nbsp; &nbsp; </p>
+                    <span class="collection-count">14 Peças&nbsp;</span>
+                </div>
+            </div>
+            
+            <!-- Coleção 2 (CORRIGIDA) -->
+            <div class="collection-item">
+                <div class="collection-tag">Edição Limitada</div>
+                <div class="collection-image-container">
+                    <img src="Aguarde.jpg" 
+                         alt="Coleção em breve" 
+                         class="collection-image">
+                    <div class="collection-overlay">
+                        <a href="Produtos.html?collection=aurora" class="view-collection-btn">Explorar Coleção</a>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3 class="collection-name">Aguarde&nbsp;</h3>
+                    <span class="collection-season">Coleção em Desenvolvimento&nbsp;</span>
+                  <p class="collection-description">
+                    Nossos artistas estão trabalhando nessa coleção, sua previsão é para (Data) por enquanto aproveite e veja os nossos outros produtos, enquanto aguarda.&nbsp; &nbsp; </p>
+                    <span class="collection-count">00 peças</span>
+                </div>
+            </div>
+            
+            <!-- Coleção 3 -->
+            <div class="collection-item">
+                <div class="collection-tag">Mais Popular</div>
+                <div class="collection-image-container">
+                    <img src="Aguarde.jpg" 
+                         alt="Coleção Essência" class="collection-image">
+                    <div class="collection-overlay">
+                        <a href="Aguarde" class="view-collection-btn">Explorar Coleção</a>
+                    </div>
+                </div>
+                <div class="collection-info">
+                  <h3 class="collection-name">Aguarde</h3>
+                    <span class="collection-season">Coleção em Desenvolvimento</span>
+                    <p class="collection-description">
+                      Nossos artistas estão trabalhando nessa coleção, sua previsão é para (Data) por enquanto aproveite e veja os nossos outros produtos, enquanto aguarda.
+                  </p>
+                    <span class="collection-count">00 peças</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Segunda linha com 3 coleções -->
+        <div class="collections-row">
+            <!-- Coleção 4 (CORRIGIDA) -->
+            <div class="collection-item">
+                <div class="collection-tag">Luxo</div>
+                <div class="collection-image-container">
+                    <img src="Aguarde.jpg" 
+                         alt="Coleção em breve" 
+                         class="collection-image">
+                    <div class="collection-overlay">
+                        <a href="Produtos.html?collection=imperio" class="view-collection-btn">Explorar Coleção</a>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3 class="collection-name">Aguarde</h3>
+                    <span class="collection-season">Coleção em Desenvolvimento</span>
+                    <p class="collection-description">
+                      Nossos artistas estão trabalhando nessa coleção, sua previsão é para (Data) por enquanto aproveite e veja os nossos outros produtos, enquanto aguarda.
+                  </p>
+                    <span class="collection-count">00 peças</span>
+                </div>
+            </div>
+            
+            <!-- Coleção 5 (CORRIGIDA) -->
+            <div class="collection-item">
+                <div class="collection-tag">Sustentável</div>
+                <div class="collection-image-container">
+                    <img src="Aguarde.jpg" 
+                         alt="Coleção em breve" 
+                         class="collection-image">
+                    <div class="collection-overlay">
+                        <a href="Produtos.html?collection=gaia" class="view-collection-btn">Explorar Coleção</a>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3 class="collection-name">Aguarde</h3>
+                    <span class="collection-season">Coleção em Desenvolvimento</span>
+                    <p class="collection-description">
+                      Nossos artistas estão trabalhando nessa coleção, sua previsão é para (Data) por enquanto aproveite e veja os nossos outros produtos, enquanto aguarda.
+                  </p>
+                    <span class="collection-count">00 peças</span>
+                </div>
+            </div>
+            
+            <!-- Coleção 6 -->
+            <div class="collection-item">
+                <div class="collection-tag">Novidade</div>
+                <div class="collection-image-container">
+                    <img src="Aguarde.jpg">
+                    <div class="collection-overlay">
+                        <a href="Produtos.html?collection=metamorfose" class="view-collection-btn">Explorar Coleção</a>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3 class="collection-name">Aguarde</h3>
+                    <span class="collection-season">Coleção em Desenvolvimento</span>
+                    <p class="collection-description">
+                      Nossos artistas estão trabalhando nessa coleção, sua previsão é para (Data) por enquanto aproveite e veja os nossos outros produtos, enquanto aguarda.
+                  </p>
+                    <span class="collection-count">00 peças</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Botão flutuante de WhatsApp (Canto inferior DIREITO) -->
+    <button class="budget-whatsapp-btn" id="budgetWhatsappBtn">
+        <i class="fab fa-whatsapp budget-whatsapp-icon"></i>
+        <span class="budget-whatsapp-text">Fazer Orçamento</span>
+    </button>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>Tribulê</h2>
+                <p>Joias que contam histórias, criadas com paixão e atenção aos detalhes desde 2025.</p>
+                <p>Todos os direitos reservados desenvolvidos pela arte da joalheria.</p>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> (11) 9999-9999</p>
+                    <p><i class="fas fa-envelope"></i> contato@studiotribule.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Higienópolis, São Paulo, Brasil</p>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <h3>Siga-nos</h3>
+                <div class="social-links">
+                    <a href="https://instagram.com/studiotribule" target="_blank" class="social-btn">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/studiotribule" target="_blank" class="social-btn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://facebook.com/studiotribule" target="_blank" class="social-btn">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Studio Tribulê. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // JavaScript para interatividade
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Página de Coleções carregada com sucesso!');
+            
+            // 1. Botão do logo - voltar para Tribulê.html
+            const logoLink = document.getElementById('logoLink');
+            logoLink.addEventListener('click', function(e) {
+                // Animação de feedback visual
+                const logoImg = this.querySelector('.logo-img');
+                logoImg.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    logoImg.style.transform = 'scale(1)';
+                }, 150);
+                
+                console.log('Logo clicado - redirecionando para Tribulê.html...');
+            });
+            
+            // 2. Inicializar o botão Coleções como ativo
+            const currentPage = window.location.pathname.split('/').pop();
+            const navButtons = document.querySelectorAll('.nav-btn');
+            
+            // Remover active de todos e adicionar apenas ao botão correspondente
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Adicionar active ao botão Coleções
+            const colecoesBtn = document.querySelector('a[href="Coleções.html"]');
+            if (colecoesBtn) {
+                colecoesBtn.classList.add('active');
+            }
+            
+            // 3. Carregar contador do carrinho
+            function updateCartBadge() {
+                try {
+                    const savedCart = localStorage.getItem('tribule_cart');
+                    if (savedCart) {
+                        const cartItems = JSON.parse(savedCart);
+                        const itemCount = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+                        const cartBadge = document.getElementById('cart-badge');
+                        
+                        if (itemCount > 0) {
+                            cartBadge.textContent = itemCount;
+                            cartBadge.style.display = 'flex';
+                        } else {
+                            cartBadge.style.display = 'none';
+                        }
+                    }
+                } catch (error) {
+                    console.log('Erro ao carregar contador do carrinho:', error);
+                }
+            }
+            
+            // Atualizar badge do carrinho
+            updateCartBadge();
+            
+            // 4. Sistema de orçamento via WhatsApp
+            const budgetWhatsappBtn = document.getElementById('budgetWhatsappBtn');
+            
+            // Configurar botão de orçamento
+            budgetWhatsappBtn.addEventListener('click', function() {
+                showBudgetModal();
+            });
+            
+            // Função para mostrar modal de orçamento
+            function showBudgetModal(collectionData = null) {
+                // Criar modal de orçamento
+                const modal = document.createElement('div');
+                modal.className = 'budget-modal';
+                
+                // Texto para o modal baseado se há coleção específica
+                let collectionText = '';
+                let collectionTitle = 'Orçamento Personalizado';
+                
+                if (collectionData) {
+                    collectionText = `
+                        <div style="background-color: #f5f5f5; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                            <p style="margin: 0; color: #231E1B; font-weight: 500;">Coleção: <strong>${collectionData.name}</strong></p>
+                            ${collectionData.season ? `<p style="margin: 5px 0 0; color: #666; font-size: 14px;">${collectionData.season}</p>` : ''}
+                        </div>
+                    `;
+                    collectionTitle = `Orçamento: ${collectionData.name}`;
+                }
+                
+                modal.innerHTML = `
+                    <div class="budget-modal-content">
+                        <button class="budget-modal-close">&times;</button>
+                        <h3 class="budget-modal-title">${collectionTitle}</h3>
+                        
+                        ${collectionText}
+                        
+                        <p style="color: #666; margin-bottom: 20px; font-size: 14px;">Preencha os dados abaixo para solicitar um orçamento personalizado. Entraremos em contato via WhatsApp para discutir os detalhes.</p>
+                        
+                        <form class="budget-form" id="budgetForm">
+                            <div class="form-group">
+                                <label class="form-label" for="budgetName">Nome Completo *</label>
+                                <input type="text" id="budgetName" class="form-input" placeholder="Digite seu nome" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="budgetPhone">WhatsApp *</label>
+                                <input type="tel" id="budgetPhone" class="form-input" placeholder="(11) 99999-9999" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="budgetEmail">E-mail</label>
+                                <input type="email" id="budgetEmail" class="form-input" placeholder="seu@email.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="budgetMessage">Mensagem *</label>
+                                <textarea id="budgetMessage" class="form-textarea" placeholder="Descreva o que você está buscando, tipo de joia, orçamento aproximado, etc..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="budget-submit-btn">
+                                <i class="fab fa-whatsapp"></i> Enviar Orçamento via WhatsApp
+                            </button>
+                        </form>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Fechar modal ao clicar no X
+                const closeBtn = modal.querySelector('.budget-modal-close');
+                closeBtn.addEventListener('click', () => {
+                    modal.style.animation = 'fadeOut 0.3s ease';
+                    setTimeout(() => {
+                        if (modal.parentNode) {
+                            document.body.removeChild(modal);
+                        }
+                    }, 300);
+                });
+                
+                // Fechar modal ao clicar fora
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.style.animation = 'fadeOut 0.3s ease';
+                        setTimeout(() => {
+                            if (modal.parentNode) {
+                                document.body.removeChild(modal);
+                            }
+                        }, 300);
+                    }
+                });
+                
+                // Configurar envio do formulário
+                const budgetForm = modal.querySelector('#budgetForm');
+                budgetForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Obter valores do formulário
+                    const name = document.getElementById('budgetName').value;
+                    const phone = document.getElementById('budgetPhone').value;
+                    const email = document.getElementById('budgetEmail').value;
+                    const message = document.getElementById('budgetMessage').value;
+                    
+                    // Validar campos obrigatórios
+                    if (!name || !phone || !message) {
+                        showNotification('Atenção', 'Por favor, preencha todos os campos obrigatórios', 'error');
+                        return;
+                    }
+                    
+                    // Formatar número de telefone (remover caracteres não numéricos)
+                    const formattedPhone = phone.replace(/\D/g, '');
+                    
+                    // Montar mensagem para WhatsApp
+                    let whatsappMessage = `*Solicitação de Orçamento - Studio Tribulê*\n\n`;
+                    whatsappMessage += `*Cliente:* ${name}\n`;
+                    if (email) whatsappMessage += `*E-mail:* ${email}\n`;
+                    
+                    if (collectionData) {
+                        whatsappMessage += `\n*Coleção de Interesse:* ${collectionData.name}\n`;
+                        if (collectionData.season) {
+                            whatsappMessage += `*Temporada:* ${collectionData.season}\n`;
+                        }
+                    }
+                    
+                    whatsappMessage += `\n*Mensagem do Cliente:*\n${message}\n\n`;
+                    whatsappMessage += `*Data:* ${new Date().toLocaleDateString('pt-BR')}\n`;
+                    whatsappMessage += `\n---\n`;
+                    whatsappMessage += `_Esta solicitação foi enviada através do site do Studio Tribulê_`;
+                    
+                    // Codificar mensagem para URL
+                    const encodedMessage = encodeURIComponent(whatsappMessage);
+                    
+                    // Número do WhatsApp (substitua pelo número real)
+                    const whatsappNumber = '5511999999999';
+                    
+                    // Criar URL do WhatsApp
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                    
+                    // Abrir WhatsApp em nova aba
+                    window.open(whatsappUrl, '_blank');
+                    
+                    // Fechar modal
+                    modal.style.animation = 'fadeOut 0.3s ease';
+                    setTimeout(() => {
+                        if (modal.parentNode) {
+                            document.body.removeChild(modal);
+                        }
+                        
+                        // Mostrar notificação de sucesso
+                        showNotification('Orçamento enviado!', 'Agora você será redirecionado para o WhatsApp', 'success');
+                        
+                        // Limpar formulário (para futuras aberturas)
+                        setTimeout(() => {
+                            budgetForm.reset();
+                        }, 500);
+                    }, 300);
+                });
+                
+                // Adicionar máscara para telefone
+                const phoneInput = modal.querySelector('#budgetPhone');
+                if (phoneInput) {
+                    phoneInput.addEventListener('input', function(e) {
+                        let value = this.value.replace(/\D/g, '');
+                        
+                        if (value.length > 11) {
+                            value = value.substring(0, 11);
+                        }
+                        
+                        if (value.length > 10) {
+                            // Formato: (00) 00000-0000
+                            value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+                        } else if (value.length > 6) {
+                            // Formato: (00) 0000-0000
+                            value = value.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
+                        } else if (value.length > 2) {
+                            value = value.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
+                        } else if (value.length > 0) {
+                            value = value.replace(/^(\d*)$/, '($1');
+                        }
+                        
+                        this.value = value;
+                    });
+                }
+            }
+            
+            // 5. Efeitos hover nas coleções
+            const collectionItems = document.querySelectorAll('.collection-item');
+            collectionItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+                
+                // Adicionar funcionalidade de orçamento específica para cada coleção
+                const viewBtn = item.querySelector('.view-collection-btn');
+                if (viewBtn) {
+                    const originalHref = viewBtn.getAttribute('href');
+                    
+                    // Adicionar botão de orçamento específico se a coleção não estiver disponível
+                    if (originalHref.includes('Aguarde') || originalHref === 'Aguarde') {
+                        // Para coleções em desenvolvimento, adicionar funcionalidade de orçamento
+                        viewBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            
+                            // Coletar dados da coleção
+                            const collectionName = item.querySelector('.collection-name').textContent;
+                            const collectionSeason = item.querySelector('.collection-season').textContent;
+                            
+                            // Mostrar modal de orçamento com dados da coleção
+                            showBudgetModal({
+                                name: collectionName,
+                                season: collectionSeason
+                            });
+                        });
+                    }
+                }
+            });
+            
+            // 6. Sistema de notificação
+            function showNotification(title, message, type = 'info') {
+                // Criar elemento de notificação
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background-color: ${type === 'success' ? '#2e7d32' : type === 'error' ? '#c62828' : '#231E1B'};
+                    color: #FFF4E5;
+                    padding: 15px 20px;
+                    border-radius: 5px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    z-index: 10000;
+                    max-width: 300px;
+                    animation: slideIn 0.3s ease-out;
+                    border-left: 4px solid #FFF4E5;
+                `;
+                
+                notification.innerHTML = `
+                    <strong>${title}</strong>
+                    <p style="margin: 5px 0 0; font-size: 14px;">${message}</p>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Remover após 3 segundos
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-in';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+            
+            // 7. Adicionar estilos de animação para notificação
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                
+                @keyframes slideOut {
+                    from {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                }
+                
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                
+                @keyframes fadeOut {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // 8. Verificar carregamento das imagens
+            const collectionImages = document.querySelectorAll('.collection-image');
+            collectionImages.forEach(img => {
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+                
+                img.addEventListener('error', function() {
+                    console.log('Erro ao carregar imagem da coleção');
+                    this.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+                });
+            });
+            
+            // 9. Filtro por coleção nas páginas de produtos
+            // Quando clicar em uma coleção, redireciona para Produtos.html com parâmetro de coleção
+            const collectionLinks = document.querySelectorAll('.view-collection-btn');
+            collectionLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Verificar se é uma coleção "Aguarde"
+                    if (this.getAttribute('href').includes('Aguarde') || this.getAttribute('href') === 'Aguarde') {
+                        e.preventDefault();
+                        return;
+                    }
+                    
+                    const collectionItem = this.closest('.collection-item');
+                    const collectionName = collectionItem.querySelector('.collection-name').textContent;
+                    
+                    // Mostrar notificação
+                    showNotification('Redirecionando', `Carregando produtos da coleção: ${collectionName}`, 'info');
+                    
+                    // Redirecionar para página de produtos com parâmetro de coleção
+                    setTimeout(() => {
+                        window.location.href = this.href;
+                    }, 1000);
+                });
+            });
+            
+            // 10. Detectar página atual e logar
+            console.log(`Página atual: ${currentPage}`);
+            if (currentPage === 'Coleções.html') {
+                console.log('Página de Coleções carregada - 6 coleções disponíveis');
+            }
+            
+            // 11. Atualizar badge do carrinho periodicamente (para quando outras páginas atualizarem o carrinho)
+            setInterval(updateCartBadge, 2000);
+        });
+        
+        // Função para ser usada nas páginas de produtos para filtrar por coleção
+        function filterProductsByCollection(collectionName) {
+            // Esta função seria implementada na página Produtos.html
+            // para filtrar os produtos por coleção quando houver o parâmetro na URL
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const collection = urlParams.get('collection');
+            
+            if (collection) {
+                console.log(`Filtrando produtos da coleção: ${collection}`);
+            }
+        }
+        
+        // Função global para abrir modal de orçamento
+        window.openBudgetModal = function(collectionData = null) {
+            // Disparar evento customizado para abrir o modal
+            document.dispatchEvent(new CustomEvent('openBudgetModal', {
+                detail: collectionData
+            }));
+        };
+    </script>
+</body>
+</html>
