@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espécies de Abelhas</title>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px;
+      background-color: #f9efe0;
+      position: relative;
+      border-bottom: 2px solid #ff9900;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0;
+      color:#ff9900
+    }
+
+    .menu-button {
+      background-color: #ffffff;
+      color: #000000;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 15px 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0px 0px rgba(0, 0, 0, 0.0);
+      outline: none;
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 0 50px;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      position: relative;
+      flex: 0 0 33.333%;
+      box-sizing: border-box;
+      padding: 30px;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .bee-name {
+      text-align: center;
+      margin-top: 5px;
+      font-size: 16px;
+    }
+
+    .hover-info {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .carousel-item:hover .hover-info {
+      opacity: 1;
+    }
+
+    .hover-info strong {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .hover-info hr {
+      width: 50%;
+      border: 1px solid #fff;
+      margin-bottom: 10px;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 25%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 5;
+    }
+
+    .menu-list {
+      color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    .menu-list ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .menu-list li {
+      padding: 15px 0;
+    }
+
+    .menu-list button {
+      background-color: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 10px 20px;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Eiru-Taquara | Espécies de Abelhas</h1>
+    <button class="menu-button" onclick="toggleMenu()">☰ Saiba Mais</button>
+  </header>
+
+  <main>
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item">
+          <img src="68831d2fba4d42d7a4cbea27668f88c2.png" alt="Abelha 1">
+          <div class="hover-info">
+            <strong>Curiosidades</strong>
+            <hr>
+            <p>Tendo o mel mais saboroso entre as abelhas dessa família a Uruçu-amarela é uma abelha de porte médio, suas colmeias não pasam de 4 a 6 mil habitantes </p>
+          </div>
+          <p class="bee-name">Uruçu-Amarela</p>
+        </div>
+        <div class="carousel-item">
+          <img src="images.jpg" alt="Tubuna">
+          <div class="hover-info">
+            <strong>Curiosidades</strong>
+            <hr>
+            <p>Abelhas grandes de temperamento díficil essas são as tubunas, sendo a maior da família, essas abelhas não são recomendadas para iniciantes</p>
+          </div>
+          <p class="bee-name">Tubuna</p>
+        </div>
+        <div class="carousel-item">
+          <img src="abelha-mandacaia-cursos-cpt.jpg" alt="Mandaçaia-Amarela">
+          <div class="hover-info">
+            <strong>Curiosidades</strong>
+            <hr>
+            <p>Tendo um mel não enjoativo a mandaçaia é uma das espécies mais dóceis só atacando se extremamentes provocadas, suas colônias são as menores tendo normalmente centenas de habitantes </p>
+          </div>
+          <p class="bee-name">Mandaçaia</p>
+        </div>
+        <div class="carousel-item">
+          <img src="MA1_480x480.png" alt="Abelha 4">
+          <div class="hover-info">
+            <strong>Curiosidades</strong>
+            <hr>
+            <p>As mandaguaris, são famosas por serem defensoras ferozes de seus ninhos, sendo que mesmo com a ausência de ferrão se é recomendado utilizar roupas de proteção em seu manuseio</p>
+          </div>
+          <p class="bee-name">Mandaguari-Amarela</p>
+        </div>
+        <div class="carousel-item">
+          <img src="97e8aed195134a3998d9322c9030451b.png" alt="Borá">
+          <div class="hover-info">
+            <strong>Curiosidades</strong>
+            <hr>
+            <p>Borás são abelhas extremamente reativas ao calor ficando mais agressivas nas horas mais quentes do dia.</p>
+          </div>
+          <p class="bee-name">Borá</p>
+        </div>
+        <div class="carousel-item">
+          <img src="Plebeia_Elvenar1.jpg" alt="Mirim">
+          <div class="hover-info">
+            <strong>Curiosidades</strong>
+            <hr>
+            <p>Mirim é a menor das abelhas sem ferrão, sendo extremamente dócil com outros seres</p>
+          </div>
+          <p class="bee-name">Mirim</p>
+        </div>
+        <div class="carousel-item">
+          <img src="download.jpg" alt="Jataí">
+          <div class="hover-info">
+            <strong>Curiosidades</strong>
+            <hr>
+            <p>As abelhas de mais fácil criação conseguem construir ninhos e se adaptar as mais diferentes situações, não são muito exigentes (o frio ainda as afeta de forma parecida a outras abelhas)</p>
+          </div>
+          <p class="bee-name">Jataí</p>
+        </div>
+        <div class="carousel-item">
+          <img src="4343940776_af3c780bd7_z.jpg" alt="Arapuá">
+          <div class="hover-info">
+            <strong>Curiosidades</strong>
+            <hr>
+            <p>Arápuas são as abelhas de mais díficil criação principalmente se você quer criar com outras espécies elas destroem flores e plantas baixas para construção de seus ninhos e são muito agressivas com outros seres especialmente outras espécies de abelha sem ferrão</p>
+          </div>
+          <p class="bee-name">Arapuá</p>
+        </div>
+        <div class="carousel-item">
+          <img src="b43236f620684cc2bade87dea00fec48.png" alt="Marmelada">
+          <div class="hover-info">
+            <strong>Curiosidades</strong>
+            <hr>
+            <p>Essas abelhas tem o costume de roubar polém de outras espécies, também demonstram extrema agressividade com outras abelhas sem ferrão, tem uma predileção por madeira de jatobá para criar seus ninhos</p>
+          </div>
+          <p class="bee-name">Marmelada</p>
+        </div>
+        <div class="carousel-item">
+          <img src="6d5efca3ace648f0804b6174873130a2.png" alt="Manduri-Amarela">
+          <div class="hover-info">
+            <strong>Curiosidades</strong>
+            <hr>
+            <p>São abelhas extremamente eficientes produzindo o máximo de mel com o mínimo de néctar, isso se deve a seus ninhos apertados com poucas reservas de mel o que as obrigou ser criativas nesse âmbito </p>
+          </div>
+          <p class="bee-name">Manduri-Amarela</p>
+        </div>
+        <div class="carousel-item">
+          <img src="m-funcao-da-abelha-rainha-cursos-cpt2.jpg" alt="Abelha 11">
+          <div class="hover-info">
+            <strong>Curiosidades</strong>
+            <hr>
+            <p>Abelhas extremamente sensíveis e dependentes do ambientes que a cercam as guaraípos costumam a ser utilizadas como bioindicadores da qualidade do ambiente, já que sua presença demonstra um local saúdavel e límpido</p>
+          </div>
+          <p class="bee-name">Guaraípo</p>
+        </div>
+      </div>
+      <button class="arrow prev">◀</button>
+      <button class="arrow next">▶</button>
+    </div>
+  </main>
+
+  <div class="overlay">
+    <div class="menu-list">
+      <ul>
+        <li><button onclick="window.location.href='../Menu/Aldeiatekoyvypora.html'">Menu</button></li>
+        <li><button onclick="window.location.href='../Siteabelhinhas/Eiru-Taquara_BancodeBambu.html'">Bambu</button></li>
+        <li><button onclick="window.location.href='../Menu/Abelhas.html'">Caixas e Abelhas</button></li>
+        <li><button onclick="window.location.href='../Aldeia/Sobrealdeia.html'">Sobre</button></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const carousel = document.querySelector('.carousel');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      const itemWidth = document.querySelector('.carousel-item').offsetWidth;
+      const offset = -currentIndex * itemWidth;
+      carousel.style.transform = `translateX(${offset}px)`;
+    }
+
+    prevButton.addEventListener('click', () => {
+      currentIndex = Math.max(0, currentIndex - 1);
+      updateCarousel();
+    });
+
+    nextButton.addEventListener('click', () => {
+      const maxIndex = carousel.children.length - 3;
+      currentIndex = Math.min(maxIndex, currentIndex + 1);
+      updateCarousel();
+    });
+
+    function toggleMenu() {
+      const overlay = document.querySelector('.overlay');
+      overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+    }
+  </script>
+</body>
+</html>
